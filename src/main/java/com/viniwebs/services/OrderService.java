@@ -1,7 +1,6 @@
 package com.viniwebs.services;
 
 import com.viniwebs.entities.Order;
-import com.viniwebs.entities.User;
 import com.viniwebs.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
