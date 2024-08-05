@@ -1,6 +1,7 @@
 package com.viniwebs.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.viniwebs.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -23,10 +24,13 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id")
     private User client;
 
+    Integer status;
+
     public Order() {}
-    public Order(Long id, Instant moment, User client) {
+    public Order(Long id, Instant moment, OrderStatus status, User client) {
         this.id = id;
         this.moment = moment;
+        setStatus(status);
         this.client = client;
     }
 
@@ -52,6 +56,14 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public OrderStatus getStatus() {
+        return OrderStatus.getOrderStatus(status);
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status.getValue();
     }
 
     @Override
