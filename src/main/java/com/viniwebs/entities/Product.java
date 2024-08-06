@@ -1,10 +1,13 @@
 package com.viniwebs.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_product")
@@ -19,6 +22,11 @@ public class Product implements Serializable {
     private String description;
     private Double price;
     private String imageUrl;
+
+    @ManyToMany
+    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
     public Product() {}
 
@@ -70,6 +78,10 @@ public class Product implements Serializable {
         this.imageUrl = imageUrl;
     }
 
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
 
     @Override
     public boolean equals(Object o) {
