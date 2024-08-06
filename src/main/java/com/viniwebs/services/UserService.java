@@ -27,4 +27,16 @@ public class UserService {
     public User save(User user) {
         return repository.save(user);
     }
+
+    public User update(User user, Long id) {
+        User entity = repository.getReferenceById(id);
+        updateData(user, entity);
+        return repository.save(entity);
+    }
+
+    private static void updateData(User user, User entity) {
+        entity.setName(user.getName());
+        entity.setEmail(user.getEmail());
+        entity.setPhone(user.getPhone());
+    }
 }
